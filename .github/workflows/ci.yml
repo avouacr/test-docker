@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Restore from cache
-        uses: ./.github/actions/cache-images
+        uses: ./.github/actions/cache-common-images
   pull:
     runs-on: ubuntu-latest
     steps:

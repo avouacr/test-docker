@@ -3,8 +3,6 @@ name: Cache common Docker images
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
 
     - name: Set up cache
       id: cache

@@ -20,6 +20,6 @@ runs:
       uses: actions/cache@v3
       with:
         path: /tmp/docker-cache/cached_images.tar
-        key: cached-images-${{ runner.os }}
+        key: cached-images-test
         restore-keys: |
-          cached-images-${{ runner.os }}
+          cached-images-

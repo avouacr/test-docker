@@ -1,0 +1,12 @@
+name: Free space
+description: Remove unwanted software to increase available space on GHA build VM.
+# https://github.com/actions/virtual-environments/issues/2840
+
+jobs:
+  free:
+    using: composite
+    steps:
+      - name: Make free space
+        shell: bash
+        run: |
+          docker image ls --format json

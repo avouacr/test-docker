@@ -5,6 +5,11 @@ on:
   push:
 
 jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore from cache
+        uses: ./.github/actions/cache-images
   pull:
     runs-on: ubuntu-latest
     steps:

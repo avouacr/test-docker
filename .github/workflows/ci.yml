@@ -7,7 +7,7 @@ on:
 
 jobs:
   free:
-    using: composite
+    runs-on: ubuntu-latest
     steps:
       - name: Make free space
         shell: bash

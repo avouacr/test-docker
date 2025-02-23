@@ -13,6 +13,7 @@ jobs:
       - name: Cache common images
         uses: ./.github/actions/cache-common-images
   pull:
+    needs: [cache]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

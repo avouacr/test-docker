@@ -1,25 +1,25 @@
-name: Cache / restore common Docker images
+name: Cache common Docker images
 
 runs:
   using: composite
   steps:
-    - name: Restore images from cache or pull from DockerHub and cache
-      shell: bash
-      run: |
-        mkdir -p /tmp/docker-cache
-        CACHE_FILE="/tmp/docker-cache/cached_images.tar"
-        if [ -f "${CACHE_FILE}" ]; then
-          docker load -i "${CACHE_FILE}"
-        else
-          docker pull dockereng/export-build
-          docker pull golang
-          mkdir -p "$(dirname ${CACHE_FILE})"
-          docker save dockereng/export-build golang -o "${CACHE_FILE}"
-        fi
-    - name: Cache images tarball
-      uses: actions/cache@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up cache
+      id: cache
+      uses: actions/cache@v4
       with:
-        path: /tmp/docker-cache/cached_images.tar
-        key: cached-images-test
-        restore-keys: |
-          cached-images-
+        path: cached_images.tar
+        key: ${{ runner.os }}-cache
+
+    - name: Cache images
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        docker pull dockereng/export-build
+        docker pull golang
+        docker save dockereng/export-build golang -o cached_images.tar
+
+    - name: Restore cached images
+      if: steps.cache.outputs.cache-hit == 'true'
+      run: docker load -i cached_images.tar

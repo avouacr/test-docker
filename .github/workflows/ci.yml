@@ -8,16 +8,12 @@ jobs:
   cache:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
       - name: Cache common images
         uses: ./.github/actions/cache-common-images
   pull:
     needs: [cache]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
       - name: Cache common images
         uses: ./.github/actions/cache-common-images
       - name: Test

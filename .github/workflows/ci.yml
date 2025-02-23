@@ -15,6 +15,10 @@ jobs:
   pull:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Cache common images
+        uses: ./.github/actions/cache-common-images
       - name: Test
         shell: bash
         run: docker pull dockereng/export-build

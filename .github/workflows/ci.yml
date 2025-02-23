@@ -12,4 +12,4 @@ jobs:
       - name: Make free space
         shell: bash
         run: |
-          docker image ls --format json
+          docker images

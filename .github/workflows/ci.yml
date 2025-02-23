@@ -2,6 +2,9 @@ name: Free space
 description: Remove unwanted software to increase available space on GHA build VM.
 # https://github.com/actions/virtual-environments/issues/2840
 
+on:
+  push:
+
 jobs:
   free:
     using: composite
